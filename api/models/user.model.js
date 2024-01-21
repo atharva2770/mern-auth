@@ -11,7 +11,12 @@ const userSchema = new mongoose.Schema({
         type: Number,
         required: true,
         unique: true,
-        maxLength: 10,
+        validate: {
+            validator: function (v) {
+                return v.toString().length === 10;
+            },
+            message: props => `${props.value} is not a 10-digit number!`
+        }
     },
 
     password: {
